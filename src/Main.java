@@ -10,7 +10,9 @@ import lc.kra.system.keyboard.event.GlobalKeyEvent;
 import org.sikuli.script.*;
 import org.sikuli.script.ImagePath;
 
+import java.awt.*;
 import java.util.List;
+
 
 /**
  *
@@ -23,10 +25,12 @@ public class Main {
      */
     private static boolean run = true;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AWTException {
         // TODO code application logic here
         GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook(true); // Use false here to switch to hook instead of raw input
         Screen s = new Screen();
+        Robot r = new Robot();
+
         ImagePath.add("src/images");
         ImagePath.add("images");
         List<ImagePath.PathEntry> paths = ImagePath.getPaths();
@@ -62,14 +66,17 @@ public class Main {
 
                 try {
                     while (true) {
-                        s.wait("1.png");
+                        s.wait("1.png",3600);
+                        r.delay(1000);
                         s.click();
-                        s.wait("2.png");
+                        s.wait("2.png",3600);
+                        r.delay(1000);
                         s.click();
-                        s.wait("3.png");
+                        s.wait("3.png",3600);
+                        r.delay(1000);
                         s.click();
                     }
-                } catch (SikuliException e) {
+                } catch (FindFailed e) {
                 }
             }
         } catch (Exception e) {
