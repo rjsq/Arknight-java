@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: Main
+Class-Path: system-hook-3.8.jar sikulixapi-2.0.4.jar
+
