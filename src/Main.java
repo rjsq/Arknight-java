@@ -8,6 +8,7 @@ import lc.kra.system.keyboard.GlobalKeyboardHook;
 import lc.kra.system.keyboard.event.GlobalKeyAdapter;
 import lc.kra.system.keyboard.event.GlobalKeyEvent;
 import org.sikuli.script.*;
+
 import java.util.List;
 
 
@@ -64,9 +65,9 @@ public class Main {
         (new Thread(() -> {
             while (run) {
                 try {
-                    s.wait("1.png", 30000);
+                    Object target = s.wait("1.png", 30000);
                     Thread.sleep(1000);
-                    s.click();
+                    s.click(target);
                     Thread.sleep(10000);
                 } catch (FindFailed | InterruptedException findFailed) {
                     findFailed.printStackTrace();
@@ -77,30 +78,30 @@ public class Main {
 
         //click 2.png
         (new Thread(() -> {
-                while (run) {
-                    try {
-                        s.wait("2.png", 30000);
-                        Thread.sleep(1000);
-                        s.click();
-                        Thread.sleep(10000);
-                    } catch (FindFailed | InterruptedException findFailed) {
-                        findFailed.printStackTrace();
-                    }
+            while (run) {
+                try {
+                    Object target = s.wait("2.png", 30000);
+                    Thread.sleep(1000);
+                    s.click(target);
+                    Thread.sleep(10000);
+                } catch (FindFailed | InterruptedException findFailed) {
+                    findFailed.printStackTrace();
                 }
+            }
         })).start();
 
         //click 3.png
         (new Thread(() -> {
-                while (run) {
-                    try {
-                        s.wait("3.png", 30000);
-                        Thread.sleep(1000);
-                        s.click();
-                        Thread.sleep(10000);
-                    } catch (FindFailed | InterruptedException findFailed) {
-                        findFailed.printStackTrace();
-                    }
+            while (run) {
+                try {
+                    Object target = s.wait("3.png", 30000);
+                    Thread.sleep(1000);
+                    s.click(target);
+                    Thread.sleep(10000);
+                } catch (FindFailed | InterruptedException findFailed) {
+                    findFailed.printStackTrace();
                 }
+            }
         })).start();
     }
 
