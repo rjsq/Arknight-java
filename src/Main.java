@@ -8,14 +8,11 @@ import lc.kra.system.keyboard.GlobalKeyboardHook;
 import lc.kra.system.keyboard.event.GlobalKeyAdapter;
 import lc.kra.system.keyboard.event.GlobalKeyEvent;
 import org.sikuli.script.*;
-import org.sikuli.script.ImagePath;
-
-import java.awt.*;
 import java.util.List;
 
 
 /**
- * @author dell
+ * @author Yin
  */
 public class Main {
 
@@ -24,11 +21,11 @@ public class Main {
      */
     private static boolean run = true;
 
-    public static void main(String[] args) throws AWTException {
+    public static void main(String[] args) {
         // TODO code application logic here
         GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook(true); // Use false here to switch to hook instead of raw input
 
-        //initialize silkulix screen, add ImagePath
+        //initialize sikulix screen, add ImagePath
         Screen s = new Screen();
         ImagePath.add("src/images");
         ImagePath.add("images");
@@ -43,99 +40,68 @@ public class Main {
                 "Global keyboard hook successfully started, press [escape] key to shutdown. Connected keyboards:");
 
         //create thread for global key listener, press ESCAPE to stop the loop
-        (new Thread() {
-            public void run() {
-                keyboardHook.addKeyListener(
-                        new GlobalKeyAdapter() {
+        (new Thread(() -> keyboardHook.addKeyListener(
+                new GlobalKeyAdapter() {
 
-                            @Override
-                            public void keyPressed(GlobalKeyEvent event
-                            ) {
-                                System.out.println(event);
-                                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_ESCAPE) {
-                                    run = false;
-                                }
-                            }
-
-                            @Override
-                            public void keyReleased(GlobalKeyEvent event
-                            ) {
-                                System.out.println(event);
-                            }
+                    @Override
+                    public void keyPressed(GlobalKeyEvent event
+                    ) {
+                        System.out.println(event);
+                        if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_ESCAPE) {
+                            run = false;
                         }
-                );
+                    }
 
-
-            }
-        }).start();
+                    @Override
+                    public void keyReleased(GlobalKeyEvent event
+                    ) {
+                        System.out.println(event);
+                    }
+                }
+        ))).start();
 
         //click 1.png
-        (new Thread() {
-            public void run() {
-
-                Robot r1 = null;
+        (new Thread(() -> {
+            while (run) {
                 try {
-                    r1 = new Robot();
-                    while (run) {
-                        try {
-                            s.wait("1.png", 3000);
-                        } catch (FindFailed findFailed) {
-                            findFailed.printStackTrace();
-                        }
-                        r1.delay(1000);
-                        s.click();
-                    }
-                } catch (AWTException e) {
-                    e.printStackTrace();
+                    s.wait("1.png", 30000);
+                    Thread.sleep(1000);
+                    s.click();
+                    Thread.sleep(10000);
+                } catch (FindFailed | InterruptedException findFailed) {
+                    findFailed.printStackTrace();
                 }
-
             }
-        }).start();
+
+        })).start();
 
         //click 2.png
-        (new Thread() {
-            public void run() {
-
-                Robot r2 = null;
-                try {
-                    r2 = new Robot();
-                    while (run) {
-                        try {
-                            s.wait("2.png", 3000);
-                        } catch (FindFailed findFailed) {
-                            findFailed.printStackTrace();
-                        }
-                        r2.delay(1000);
+        (new Thread(() -> {
+                while (run) {
+                    try {
+                        s.wait("2.png", 30000);
+                        Thread.sleep(1000);
                         s.click();
+                        Thread.sleep(10000);
+                    } catch (FindFailed | InterruptedException findFailed) {
+                        findFailed.printStackTrace();
                     }
-                } catch (AWTException e) {
-                    e.printStackTrace();
                 }
-
-            }
-        }).start();
+        })).start();
 
         //click 3.png
-        (new Thread() {
-            public void run() {
-                Robot r3 = null;
-                try {
-                    r3 = new Robot();
-                    while (run) {
-                        try {
-                            s.wait("3.png", 3000);
-                        } catch (FindFailed findFailed) {
-                            findFailed.printStackTrace();
-                        }
-                        r3.delay(1000);
+        (new Thread(() -> {
+                while (run) {
+                    try {
+                        s.wait("3.png", 30000);
+                        Thread.sleep(1000);
                         s.click();
+                        Thread.sleep(10000);
+                    } catch (FindFailed | InterruptedException findFailed) {
+                        findFailed.printStackTrace();
                     }
-                } catch (AWTException e) {
-                    e.printStackTrace();
                 }
-
-            }
-        }).start();
+        })).start();
     }
 
 }
