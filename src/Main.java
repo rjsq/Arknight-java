@@ -7,7 +7,9 @@
 import lc.kra.system.keyboard.GlobalKeyboardHook;
 import lc.kra.system.keyboard.event.GlobalKeyAdapter;
 import lc.kra.system.keyboard.event.GlobalKeyEvent;
-import org.sikuli.script.*;
+import org.sikuli.script.FindFailed;
+import org.sikuli.script.ImagePath;
+import org.sikuli.script.Screen;
 
 import java.util.List;
 
@@ -50,6 +52,8 @@ public class Main {
                         System.out.println(event);
                         if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_ESCAPE) {
                             run = false;
+                            System.out.println("Program exit");
+                            System.exit(0);
                         }
                     }
 
